@@ -84,8 +84,7 @@
                     {{-- If the role is "instructor" --}}
                     @if (Auth::check() && str_contains(Auth::user()->role, 'instructor'))
                         <label for="" style="margin-top:10px;">OPERATION</label>
-                        <a href="{{ route('instructor.my_class') }}"
-                            class="{{ Request::is('my_class') ? 'active' : '' }}">
+                        <a href="{{ route('instructor.my_class') }}" class="{{ Request::is('my_class') ? 'active' : '' }}">
                             <i class="fa-regular fa-clipboard"></i>
                             <span>My Class</span>
                         </a>
@@ -162,8 +161,11 @@
             {{-- for fullscreen and toggle navbar --}}
             <div class="content-header">
                 <i class="fa-solid fa-bars" id="menuToggle"></i>
-                <i id="notificationBell" class="fa-solid fa-bell notification-bell" onclick="toggleDropdown()"></i>
-                <i id="fullscreen-icon" class="fa-solid fa-expand" title="Expand"></i>
+                <div >
+                    <i  id="notificationBell" style="margin-right: 20px;" class="fa-solid fa-bell notification-bell" onclick="toggleDropdown()"></i>
+                    <i id="fullscreen-icon" class="fa-solid fa-expand" title="Expand"></i>
+                </div>
+
             </div>
 
             <style>
@@ -234,7 +236,7 @@
                                 Class ID: {{ $notif->class_id }}<br>
                                 Class Subject Code: {{ $notif->class_subject_code }} <br>
                                 Class Descriptive Title: {{ $notif->class_descriptive_title }} <br>
-                                From:  {{ $notif->added_by_name }} <br>
+                                From: {{ $notif->added_by_name }} <br>
                                 To: {{ $notif->target_by_name }} <br>
                                 {{ $notif->created_at }}
 
@@ -268,13 +270,13 @@
 
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     // Handle navbar state from localStorage
                     if (localStorage.getItem('navMinimized') === 'true') {
                         $('#navBar').addClass('minimized');
                     }
 
-                    $('#menuToggle').click(function() {
+                    $('#menuToggle').click(function () {
                         $('#navBar').toggleClass('minimized');
                         localStorage.setItem('navMinimized', $('#navBar').hasClass('minimized'));
                     });
@@ -334,13 +336,13 @@
     <!-- for logout -->
 
     <script>
-        $(document).ready(function() {
-            $(".nav-profile").click(function(event) {
+        $(document).ready(function () {
+            $(".nav-profile").click(function (event) {
                 event.stopPropagation();
                 $(".logout-container").toggleClass("show");
             });
 
-            $(document).click(function(event) {
+            $(document).click(function (event) {
                 if (!$(event.target).closest(".nav-profile").length) {
                     $(".logout-container").removeClass("show");
                 }
